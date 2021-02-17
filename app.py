@@ -1,15 +1,22 @@
 import streamlit as st
 
+import src.pages.home as home_page
+import src.pages.pytorch as pytorch_page
+import src.pages.tensorflow as tensorflow_page
+import src.pages.timeseries as timeseries_page
+import src.pages.graphs.index as graphs_page
+
 st.set_page_config(
     page_title='AI Portfolio',
     initial_sidebar_state='auto'
 )
 
 PAGES = {
-    "Home": 0,
-    "PyTorch": 1,
-    "TensorFlow": 2,
-    "Time-Series": 3
+    "Home": home_page,
+    "PyTorch": pytorch_page,
+    "TensorFlow": tensorflow_page,
+    "Time-Series": timeseries_page,
+    "Graphs": graphs_page
 }
 
 def main():
@@ -27,7 +34,7 @@ def main():
     page = PAGES[selection]
 
     with st.spinner("Loading %s ..." % (selection)):
-        st.write(page)
+        page.write()
 
     st.sidebar.title("About")
     st.sidebar.info("Application under development")
